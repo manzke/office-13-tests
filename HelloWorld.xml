@@ -17,7 +17,7 @@
   </Capabilities>
 
   <DefaultSettings>
-    <SourceLocation DefaultValue="\\7T03TP1\HelloWorld\HelloWorld.html"/>
+    <SourceLocation DefaultValue="http://manzke.github.com/office-13-tests/HelloWorld.html"/>
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>
