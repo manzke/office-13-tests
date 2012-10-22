@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:type="TaskPaneApp">
+  <Id>08afd7fe-1631-42f4-84f1-5ba51e242f98</Id>
+  <Version>1.0</Version>
+  <ProviderName>Microsoft</ProviderName>
+  <DefaultLocale>EN-US</DefaultLocale>
+  <DisplayName DefaultValue="Hello World app"/>
+  <Description DefaultValue="My first app."/>
+  <IconUrl DefaultValue=
+    "http://officeimg.vo.msecnd.net/_layouts/images/general/office_logo.jpg"/>
+
+  <Capabilities>
+    <Capability Name="Document"/>
+    <Capability Name="Workbook"/>
+  </Capabilities>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="\\7T03TP1\HelloWorld\HelloWorld.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+</OfficeApp>
