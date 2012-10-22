@@ -1,47 +1,36 @@
-/// <reference path="Scripts/Office.js" />
-/// <reference path="Scripts/MicrosoftAjax.js" />
-
 var OfficeAppName;
 
 Office.initialize = function (reason) {
 // Add any initialization logic to this function.
-    if (Office.context.document.customXmlParts) {
-        OfficeAppName = 'Word';
-    }
-    else {
-        OfficeAppName = 'Excel';
-    }
 }
 
 var MyArray = [['Berlin'],['Munich'],['Duisburg']];
 
 function writeData() {
+printData("write:data");
     Office.context.document.setSelectedDataAsync(MyArray, { coercionType: 'matrix' });
 }
 
 function ReadData() {
+printData("read:data");
     Office.context.document.getSelectedDataAsync("matrix", function (result) {
         if (result.status === "succeeded"){
             printData(result.value);
-        }
-
-        else{
+        } else{
             printData(result.error.name + ":" + err.message);
         }
     });
 }
 
-      function printData(data) {
-    {
-        var printOut = "";
+function printData(data) {
+	var printOut = "";
 
-        for (var x = 0 ; x < data.length; x++) {
-            for (var y = 0; y < data[x].length; y++) {
-                printOut += data[x][y] + ",";
-            }
-        }
-       document.getElementById("results").innerText = printOut;
-    }
+	for (var x = 0 ; x < data.length; x++) {
+		for (var y = 0; y < data[x].length; y++) {
+			printOut += data[x][y] + ",";
+		}
+	}
+	document.getElementById("results").innerText = printOut;
 }
 
 
