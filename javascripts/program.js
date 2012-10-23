@@ -8,22 +8,22 @@ var MyArray = [['Berlin'],['Munich'],['Duisburg']];
 
 function writeData() {
 printData("write:data");
-    Office.context.document.setSelectedDataAsync(MyArray, { coercionType: 'matrix' });
+    Office.context.document.setSelectedDataAsync(MyArray, { coercionType: Office.CoercionType.Matrix });
 }
 
 function ReadData() {
-printData("read:data");
-Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, 
+Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, 
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
+			printData('returned from hell');
             var error = asyncResult.error;
             if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-                write(error.name + ": " + error.message);
+                printData(error.name + ": " + error.message);
             } 
             else {
                 // Get selected data.
                 var dataValue = asyncResult.value; 
-                write('Selected data is ' + dataValue);
+                printData('Selected data is ' + dataValue);
             }            
         });
 
