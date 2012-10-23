@@ -11,10 +11,10 @@ function writeData() {
 printData("write:data");
     Office.context.document.setSelectedDataAsync(MyArray, { coercionType: Office.CoercionType.Matrix });
 }
-
+//{ valueFormat: "unformatted", filterType: "all" },
 function ReadData() {
 Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, 
-        { valueFormat: "unformatted", filterType: "all" },
+        
         function (asyncResult) {
 			printData('returned from hell');
             var error = asyncResult.error;
