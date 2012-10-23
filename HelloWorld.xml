@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:type="TaskPaneApp">
   <Id>08afd7fe-1631-42f4-84f1-5ba51e242f98</Id>
-  <Version>1.0</Version>
+  <Version>0.2</Version>
   <ProviderName>Microsoft</ProviderName>
   <DefaultLocale>EN-US</DefaultLocale>
   <DisplayName DefaultValue="Hello World app"/>

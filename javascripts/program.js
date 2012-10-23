@@ -1,45 +1,3 @@
-Office.initialize = function (reason) {
-// Add any initialization logic to this function.
-printData("initialize: "+reason);
-}
-
-var MyArray = [['Berlin'],['Munich'],['Duisburg']];
-
-function writeData() {
-printData("write:data");
-    Office.context.document.setSelectedDataAsync(MyArray, { coercionType: Office.CoercionType.Matrix });
-}
-//{ valueFormat: "unformatted", filterType: "all" },
-function ReadData() {
-Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, 
-        
-        function (asyncResult) {
-			printData('returned from hell');
-            var error = asyncResult.error;
-            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-                printData(error.name + ": " + error.message);
-            } 
-            else {
-                // Get selected data.
-                var dataValue = asyncResult.value; 
-                printData('Selected data is ' + dataValue);
-            }            
-        });
-
-//    Office.context.document.getSelectedDataAsync("matrix", function (result) {
-//        if (result.status === "succeeded"){
-//            printData(result.value);
-//        } else{
-//            printData(result.error.name + ":" + err.message);
-//        }
-//    });
-}
-
-function printData(data) {
-	document.getElementById("results").innerText += data;
-}
-
-
 function getFileContentTheNewWay1(){
     var fileContent;
     Office.context.document.getFileAsync ("compressed", function (result) {
@@ -62,10 +20,29 @@ function getFileContentTheNewWay2(){
     });
 }
 
-Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler(), function(result){} 
-);
 
-// Event handler function.
-function myHandler(eventArgs){
-printdata('Document Selection Changed');
+
+
+// The document the dictionary app is interacting with.
+var _doc; 
+
+// Initialize the app. 
+Office.initialize = function (reason) {
+    // Store a reference to the current document.
+    _doc = Office.context.document; 
+    // Check whether text is already selected.
+    tryUpdatingSelectedWord(); 
+    _doc.addHandlerAsync("documentSelectionChanged", tryUpdatingSelectedWord); //Add a handler to refresh when the user changes selection.
+};
+
+// Executes when event is raised on user's selection changes, and at initialization time. 
+// Gets the current selection and passes that to asynchronous callback method.
+function tryUpdatingSelectedWord() {
+    _doc.getSelectedDataAsync(Office.CoercionType.Text, selectedTextCallback); 
+}
+
+// Async callback that executes when the app gets the user's selection.
+// Determines whether anything should be done. If so, it makes requests that will be passed to various functions.
+function selectedTextCallback(selectedText) {
+    document.getElementById("results").innerText += 'received: '+data;
 }
