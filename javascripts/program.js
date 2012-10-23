@@ -44,7 +44,7 @@ function printData(data) {
 			printOut += data[x][y] + ",";
 		}
 	}
-	document.getElementById("results").innerText = printOut;
+	document.getElementById("results").innerText += printOut;
 }
 
 
