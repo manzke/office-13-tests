@@ -13,13 +13,27 @@ printData("write:data");
 
 function ReadData() {
 printData("read:data");
-    Office.context.document.getSelectedDataAsync("matrix", function (result) {
-        if (result.status === "succeeded"){
-            printData(result.value);
-        } else{
-            printData(result.error.name + ":" + err.message);
-        }
-    });
+Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, 
+        { valueFormat: "unformatted", filterType: "all" },
+        function (asyncResult) {
+            var error = asyncResult.error;
+            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                write(error.name + ": " + error.message);
+            } 
+            else {
+                // Get selected data.
+                var dataValue = asyncResult.value; 
+                write('Selected data is ' + dataValue);
+            }            
+        });
+
+//    Office.context.document.getSelectedDataAsync("matrix", function (result) {
+//        if (result.status === "succeeded"){
+//            printData(result.value);
+//        } else{
+//            printData(result.error.name + ":" + err.message);
+//        }
+//    });
 }
 
 function printData(data) {
