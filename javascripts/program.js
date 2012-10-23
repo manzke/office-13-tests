@@ -2,6 +2,7 @@ var OfficeAppName;
 
 Office.initialize = function (reason) {
 // Add any initialization logic to this function.
+printData("initialize: "+reason);
 }
 
 var MyArray = [['Berlin'],['Munich'],['Duisburg']];
@@ -37,14 +38,7 @@ Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
 }
 
 function printData(data) {
-	var printOut = "";
-
-	for (var x = 0 ; x < data.length; x++) {
-		for (var y = 0; y < data[x].length; y++) {
-			printOut += data[x][y] + ",";
-		}
-	}
-	document.getElementById("results").innerText += printOut;
+	document.getElementById("results").innerText += data;
 }
 
 
