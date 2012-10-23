@@ -1,5 +1,3 @@
-var OfficeAppName;
-
 Office.initialize = function (reason) {
 // Add any initialization logic to this function.
 printData("initialize: "+reason);
@@ -62,4 +60,12 @@ function getFileContentTheNewWay2(){
                 fileContent = result.value.data;
         });
     });
+}
+
+Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler(), function(result){} 
+);
+
+// Event handler function.
+function myHandler(eventArgs){
+printdata('Document Selection Changed');
 }
