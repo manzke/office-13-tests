@@ -4,41 +4,45 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
         <link rel="stylesheet" type="text/css" href="http://manzke.github.com/office-13-tests/stylesheets/program.css" />
-        <script src="http://manzke.github.com/office-13-tests/javascripts/office.js"></script>
+        <!--script src="http://manzke.github.com/office-13-tests/javascripts/office.js"></script>
 		<script src="http://manzke.github.com/office-13-tests/javascripts/MicrosoftAjax.js"></script>
 		<script src="http://manzke.github.com/office-13-tests/javascripts/word-15.debug.js"></script>
-        <!--script src="http://manzke.github.com/office-13-tests/javascripts/program.js"></script-->
+        <script src="http://manzke.github.com/office-13-tests/javascripts/program.js"></script-->
     </head>
     <body>
         Results: <div id="results"></div>
-    </body>
-	<script type="text/javascript">
-		var application = new function(){
-			var _doc;
-			
-			this.init = function () {
-				Office.initialize = function (reason) {
-					// Store a reference to the current document.
-					_doc = Office.context.document; 
-					// Check whether text is already selected.
-					onAfterOfficeInit();
-				};
+		<script type="text/javascript" src="https://az88874.vo.msecnd.net/api/1.0/office.js"></script>
+		<script type="text/javascript">
+			var application = new function(){
+				var _doc;
+				
+				this.init = function () {
+					Office.initialize = function (reason) {
+						displayText("init called");
+						// Store a reference to the current document.
+						_doc = Office.context.document; 
+						// Check whether text is already selected.
+						onAfterOfficeInit();
+					};
+				}
+				
+				function onAfterOfficeInit(){
+					_doc.addHandlerAsync(Office.EventType.DocumentSelectionChanged, onSelectionChange)
+				}
+				
+				function onSelectionChange(evt){
+					_doc.getSelectedDataAsync(Office.CoercionType.Text, displayText);
+				}
+				
+				function displayText(result){
+					document.getElementById("results").innerText += 'received: '+result;
+				}
+				
+				
 			}
-			
-			function onAfterOfficeInit(){
-				_doc.addHandlerAsync(Office.EventType.DocumentSelectionChanged, onSelectionChange)
-			}
-			
-			function onSelectionChange(evt){
-				_doc.getSelectedDataAsync(Office.CoercionType.Text, getSelectedText);
-			}
-			
-			function getSelectedText(result){
-				document.getElementById("results").innerText += 'received: '+result;
-			}
-		}
-	</script>
-	<script type="text/javascript">
-		application.init();
-	</script>
+		</script>
+		<script type="text/javascript">
+			application.init();
+		</script>
+	</body>
 </html>
